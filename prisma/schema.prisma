@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Country {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique // ISO code: RS, DE, AT
+  name      String
+  currency  String   // RSD, EUR
+  flagUrl   String?
+  
+  priceRecords       PriceRecord[]
+  economicIndicators EconomicIndicator[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    // Groceries, Transport, Utilities
+  slug     String    @unique
+  products Product[]
+}
+
+model Product {
+  id           Int           @id @default(autoincrement())
+  name         String        // Milk (1L), Bread (500g), Diesel (1L)
+  slug         String        @unique
+  unit         String        // l, kg, piece
+  categoryId   Int
+  category     Category      @relation(fields: [categoryId], references: [id])
+  priceRecords PriceRecord[]
+}
+
+model PriceRecord {
+  id        Int      @id @default(autoincrement())
+  value     Decimal  @db.Decimal(10, 2) // Price in local currency
+  valueEur  Decimal? @db.Decimal(10, 2) // Converted to EUR for easy comparison
+  
+  countryId Int
+  country   Country  @relation(fields: [countryId], references: [id])
+  
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  
+  source    String?  // "Maxi", "Lidl", "Eurostat", "Manual"
+  isManual  Boolean  @default(false) // To distinguish manual Serbia entries
+  date      DateTime @default(now()) // Date of recording
+  
+  createdAt DateTime @default(now())
+}
+
+enum IndicatorType {
+  SALARY_NET_AVG
+  SALARY_GROSS_AVG
+  PENSION_AVG
+  PENSION_MIN
+  TAX_VAT_STANDARD
+  TAX_INCOME_AVG
+}
+
+model EconomicIndicator {
+  id        Int           @id @default(autoincrement())
+  type      IndicatorType
+  value     Decimal       @db.Decimal(10, 2) // Value in local currency
+  valueEur  Decimal?      @db.Decimal(10, 2)
+  
+  countryId Int
+  country   Country       @relation(fields: [countryId], references: [id])
+  
+  year      Int           // e.g. 2024
+  month     Int?          // e.g. 12
+  source    String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([countryId, type, year, month]) // Prevent duplicates for same period
+}
+
+// Istorijski podaci za Srbiju (plata, kurs EUR, dizel)
+model SerbiaHistoricalData {
+  id               Int      @id @default(autoincrement())
+  year             Int      @unique
+  netSalaryRsd     Decimal? @db.Decimal(10, 2) // Neto plata decembar (RSD)
+  eurRsdRate       Decimal? @db.Decimal(10, 4) // Godišnji prosek EUR/RSD kursa
+  dieselRsdPerLitre Decimal? @db.Decimal(10, 2) // Godišnji prosek dizel RSD/litar
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

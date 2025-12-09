@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "serbia:update": "python scripts/scrape-serbia.py"
+  }
+}
