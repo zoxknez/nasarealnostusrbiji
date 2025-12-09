@@ -194,6 +194,21 @@ export function ComparisonView({
                   className="border-t border-white/10"
                 >
                   <div className="p-6">
+                    {/* Napomena o podacima */}
+                    <div className="mb-6 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+                      <div className="flex gap-3 items-start">
+                        <div className="text-2xl">⚠️</div>
+                        <div className="flex-1">
+                          <p className="text-yellow-200 text-sm leading-relaxed">
+                            <span className="font-bold">Napomena o podacima:</span> Izvukao sam podatke, možda ima grešaka, ali je suština bitna. 
+                            Dok sam sa <span className="font-bold text-yellow-300">1000 RSD 2009/10</span> mogao taksijem do grada, pojesti nešto i 10 piva u kaficu, 
+                            danas mi za to isto treba <span className="font-bold text-yellow-300">4000-5000 RSD</span>, znači <span className="font-bold text-red-400">4-5x</span> su troškovi skočili. 
+                            Da je prosečna plata pratila trend poskupljenja, realno <span className="font-bold text-green-400">1500€ minimum</span> bi trebala biti.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
                     {serbiaHistoricalData.length > 0 ? (
                       <SerbiaHistoryChart data={serbiaHistoricalData.map((d: any) => ({
                         year: d.year,
