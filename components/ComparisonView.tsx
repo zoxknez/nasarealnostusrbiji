@@ -81,6 +81,8 @@ export function ComparisonView({
 }: ComparisonViewProps) {
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({})
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null)
 
   const toggleCategory = (catId: number) => {
     setOpenCategories(prev => ({ ...prev, [catId]: !prev[catId] }))
@@ -90,6 +92,13 @@ export function ComparisonView({
     ...cat,
     products: products.filter((p: any) => p.categoryId === cat.id)
   }))
+
+  const filteredProducts = selectedCategory
+    ? products.filter((p: any) => {
+        const category = categories.find((c: any) => c.id === p.categoryId)
+        return category?.slug === selectedCategory
+      })
+    : products
 
   return (
     <main className="relative min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white overflow-hidden">
@@ -263,7 +272,7 @@ export function ComparisonView({
                   const diff = ((afford / serbiaAfford - 1) * 100)
                   return { ...r, price, salary, afford, diff }
                 })
-                .sort((a, b) => b.afford - a.afford)
+                .sort((a: any, b: any) => b.afford - a.afford)
 
               const bestCountry = countriesData[0]
               const worstCountry = countriesData[countriesData.length - 1]
