@@ -19,11 +19,11 @@ export function SerbiaHistoryChart({ data }: SerbiaHistoryChartProps) {
   const dizelData = data.filter(d => d.dizelRsd !== null)
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 sm:space-y-8">
       {/* Plata u EUR */}
-      <div className="bg-slate-900/50 backdrop-blur-xl rounded-2xl border border-cyan-400/30 p-6">
-        <h2 className="text-3xl font-bold mb-6 text-cyan-400">💶 Prosečna plata u EUR</h2>
-        <ResponsiveContainer width="100%" height={300}>
+      <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-cyan-400/30 p-3 sm:p-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-cyan-400">💶 Prosečna plata u EUR</h2>
+        <ResponsiveContainer width="100%" height={250}>
           <LineChart data={plataData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
             <XAxis 
@@ -60,9 +60,9 @@ export function SerbiaHistoryChart({ data }: SerbiaHistoryChartProps) {
       </div>
 
       {/* Kurs EUR/RSD */}
-      <div className="bg-slate-900/50 backdrop-blur-xl rounded-2xl border border-emerald-400/30 p-6">
-        <h2 className="text-3xl font-bold mb-6 text-emerald-400">💱 Kurs EUR/RSD</h2>
-        <ResponsiveContainer width="100%" height={300}>
+      <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-emerald-400/30 p-3 sm:p-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-emerald-400">💱 Kurs EUR/RSD</h2>
+        <ResponsiveContainer width="100%" height={250}>
           <LineChart data={kursData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
             <XAxis 
@@ -100,9 +100,9 @@ export function SerbiaHistoryChart({ data }: SerbiaHistoryChartProps) {
       </div>
 
       {/* Dizel RSD */}
-      <div className="bg-slate-900/50 backdrop-blur-xl rounded-2xl border border-orange-400/30 p-6">
-        <h2 className="text-3xl font-bold mb-6 text-orange-400">⛽ Cena dizela (RSD/litar)</h2>
-        <ResponsiveContainer width="100%" height={300}>
+      <div className="bg-slate-900/50 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-orange-400/30 p-3 sm:p-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-orange-400">⛽ Cena dizela (RSD/litar)</h2>
+        <ResponsiveContainer width="100%" height={250}>
           <LineChart data={dizelData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
             <XAxis 
