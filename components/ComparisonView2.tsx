@@ -156,6 +156,32 @@ export function ComparisonView({
           </div>
         </motion.div>
 
+        {/* Napomena o aplikaciji */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-gradient-to-br from-amber-900/30 to-orange-900/30 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-amber-400/50 p-4 sm:p-6"
+          >
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="text-3xl sm:text-4xl shrink-0">💡</div>
+              <div className="space-y-2 sm:space-y-3">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-amber-300">
+                  O aplikaciji - naša realnost u Srbiji
+                </h3>
+                <p className="text-sm sm:text-base text-white/90 leading-relaxed">
+                  Izvukao sam podatke za ovu aplikaciju, možda ima grešaka, ali je suština bitna. 
+                  Dok sam sa <span className="font-bold text-amber-300">1000 RSD 2009/10</span> mogao taksijem do grada, pojesti nešto i 10 piva u kaficu, 
+                  danas mi za to isto treba <span className="font-bold text-amber-300">4000-5000 RSD</span>, znači <span className="font-bold text-red-400">4-5x su troškovi skočili</span>.
+                </p>
+                <p className="text-sm sm:text-base text-white/90 leading-relaxed">
+                  Da je prosečna plata pratila ovaj trend poskupljenja, ona bi realno morala iznositi minimum <span className="font-bold text-emerald-300 text-lg sm:text-xl">1.500 EUR</span>.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
         {/* Srbija Istorija Section */}
         <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
           <motion.div
