@@ -369,7 +369,7 @@ export function ComparisonView({
                                 isSerbia: r.country.code === 'RS'
                               }
                             })
-                            .sort((a, b) => b.afford - a.afford)
+                            .sort((a: any, b: any) => b.afford - a.afford)
 
                           const rank = allCountriesData.findIndex((c: any) => c.isSerbia) + 1
                           const totalCountries = allCountriesData.length
