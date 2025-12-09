@@ -360,16 +360,8 @@ export function ComparisonView({
                       <div className="p-3 sm:p-6 space-y-3 sm:space-y-4">
                         {category.products
                           .sort((a: any, b: any) => {
-                            // Sort by affordability (highest first)
-                            const serbiaA = a.priceRecords.find((r: any) => r.country.code === 'RS')
-                            const serbiaB = b.priceRecords.find((r: any) => r.country.code === 'RS')
-                            if (!serbiaA || !serbiaB) return 0
-                            const priceA = Number(serbiaA.valueEur)
-                            const priceB = Number(serbiaB.valueEur)
-                            const salary = salaryMap['RS'] || 850
-                            const affordA = salary / priceA
-                            const affordB = salary / priceB
-                            return affordB - affordA // Highest first
+                            // Sort by name alphabetically for clarity
+                            return a.name.localeCompare(b.name, 'sr')
                           })
                           .map((product: any) => {
                           const isProductOpen = openProducts[product.id]
